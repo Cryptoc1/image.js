@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>Image.js Demo</title>
+<style>
+  html, body {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+  }
+  #cat {
+    margin: 0 auto;
+    padding: 0;
+    position: absolute;
+    width: auto;
+    max-height: 100%;
+  }
+</style>
+</head>
+
+<body>
+  
+<img id="cat" src="img/cat.jpg" data-image-js>
+
+<script src="image.js"></script>
+<script>
+  window.onload = function () {
+    Images.init()
+  }
+</script>
+
+</body>
+
+</html>
