@@ -8,32 +8,58 @@
         html,
         body {
             margin: 0 auto;
-            padding: 0;
+            padding: 4pt 0 4pt 0;
             width: 100%;
+            text-align: center;
+            font-family: Helvetica, Roboto, Arial, sans-serif;
+            font-size: 13pt;
+            background-color: #FEFEFE;
+            color: #363636;
+        }
+
+        .container {
+          margin: 2pt auto;
+          width: 80%;
         }
 
         img {
-            margin: 0 auto;
-            padding: 0;
+            margin: 2pt auto;
+            width: 100%;
             max-width: 100%;
             max-height: 100%;
         }
 
         img:not([data-image-js-loaded]) {
-          filter: blur(1px);
+            filter: blur(1px);
+        }
+
+        label {
+            display: block;
+            margin: 6pt 0 3pt 0;
+            float: left;
+            font-size: 10pt;
         }
     </style>
 </head>
 
 <body>
-    <img src="img/cat.jpg" data-image-js>
-    <img src="img/cat2.jpg" data-image-js>
+    <h2>Image.js POC Demo</h2>
+    <p>The low-res images have a 1px blur filter applied to them.</p>
+
+    <div class="container">
+        <label for="cat">Compressed size: 80k, Uncompressed size: 1.1MB, Transition load: </label>
+        <img name="cat" src="img/cat.jpg" data-image-js>
+        <br><br>
+        <label for="cat2">Compressed size: 112k, Uncompressed size: 20.1MB, Transition load: </label>
+        <img name="cat2" src="img/cat2.jpg" data-image-js>
+    </div>
 
     <script src="image.js"></script>
     <script>
         window.onload = function() {
             Images.on('image-loaded', function(e) {
-                console.log(e)
+                var l = document.querySelector('label[for="' + e.elements.modified.name + '"]')
+                l.textContent += (e.time + 'ms')
             })
 
             Images.init()

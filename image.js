@@ -33,8 +33,8 @@
       if (imgs[i].dataset.imageJs !== undefined) {
         var img = new Image()
         img.onload = function() {
-          imgs[this.index].src = this.src
-          imgs[this.index].dataset.imageJsLoaded = true
+          imgs[this.data.index].src = this.src
+          imgs[this.data.index].dataset.imageJsLoaded = true
 
           emit('image-loaded', {
             event: 'image-loaded',
@@ -43,8 +43,9 @@
             image: this,
             elements: {
               loaded: this,
-              modified: imgs[this.index]
+              modified: imgs[this.data.index]
             },
+            time: Date.now() - this.data.init,
             src: this.src
           })
         }
@@ -53,7 +54,10 @@
           path = src.slice(0, src.lastIndexOf('.')),
           ext = src.slice(src.lastIndexOf('.'), src.length)
 
-        img.index = i
+        img.data = {
+            index: i,
+            init: Date.now()
+        }
         img.src = path + '@2x' + ext
       }
     }
